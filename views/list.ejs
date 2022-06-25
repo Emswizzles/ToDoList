@@ -13,9 +13,9 @@
                 </div>
             </form>
         <% }); %>
-        <form action="/" method="POST" class="item">
+        <form action="/list" method="POST" class="item">
             <input type="text" name="item" placeholder="New Item" autocomplete="off">
-            <button type="submit" name="list" value="<%= listTitle %>">+</button>
+            <button type="submit" class="add-btn" name="list" value="<%= listTitle %>">+</button>
         </form>
 </div>
 <%- include ("footer.ejs") -%>

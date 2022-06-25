@@ -2,7 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>To Do List App</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>ToDoodle</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <script src=https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js></script>
 </head>
+<script>
+    /* only execute this script when the document is ready */
+    $(document).ready(function(){
+    /* function called when you click of the button */
+    $(".nav-btn").click(function(){
+        /* this if else to change the text in the button */
+        if($(".nav-btn").text() == "☰"){
+        $(".nav-btn").text("🞬");
+        }else{
+        $(".nav-btn").text("☰");
+        }
+
+    /* this function toggle the visibility of our "li" elements */
+    $(".nav-item").toggle("slow");
+    });
+});
+</script>
 <body>
+    <nav>
+        <ul>
+            <li class="logo">ToDoodle</li>
+            <button class="nav-btn" onclick="menuFunction()"> 🞬 </button>
+                <li class="nav-item"><a href="/">Home</a></li>
+                <li class="nav-item"><a href="/list">Today</a></li>
+                <li class="nav-item"><a href="/mylists">My Lists</a></li>
+        </ul>
+    </nav>

@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 // Connect to the database using the mongodb server - if the db doesnt already exist, it will create it
 main().catch(err => console.log(err));
 async function main() {
-  await mongoose.connect('mongodb+srv://admin-emma:test123@cluster0.pdoc2.mongodb.net/todolistDB');
+  await mongoose.connect('mongodb+srv://admin-emma:test123@cluster0.pdoc2.mongodb.net/todolistDB1');
 };
 
 //Creates a SCHEMA that sets out the fields each document will have and their datatypes
@@ -45,13 +45,21 @@ const List = new mongoose.model ("List", listSchema);
 app.use(express.urlencoded({extended: true}));
 
 //Needed so that express serves up the static files like the css stylesheet
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 
 //Code to allow us to use EJS (templating)
 app.set('view engine', 'ejs');
 
 //Code to run when get request for the home route is recieved by the server
 app.get("/", function(req, res){
+    res.render("homepage")
+});
+
+app.get("/mylists", function(req, res){
+    res.render("mylists")
+});
+
+app.get("/list", function(req, res){
     // Querying the DB to get all of the stored list items
     Item.find({}, function(err, results){
         if(err){
@@ -75,7 +83,7 @@ app.get("/", function(req, res){
 });
 
 // Route for any custom parameter path e.g. localhost/worklist
-app.get("/:customListName", function(req, res){
+app.get("/list/:customListName", function(req, res){
     //Saving the custom list name from the path that the user entered
     const customListName = _.capitalize(req.params.customListName);
 
@@ -93,18 +101,14 @@ app.get("/:customListName", function(req, res){
                 });
                 newList.save();
                 console.log("New list created");
-                res.redirect("/" + customListName);
+                res.redirect("/list/" + customListName);
             };
         };
     });
 });
 
-app.get("/about", function(req, res){
-    res.render("about")
-});
-
 //Code to run when a post request is recieved by the home route
-app.post("/", function(req, res){
+app.post("/list", function(req, res){
     const listName = req.body.list;
 
     const itemName = req.body.item;
@@ -115,12 +119,12 @@ app.post("/", function(req, res){
     //Checks to see which list the plus button has been clicked on so that the item is added to the correct one
     if (listName === "Today"){
         newItem.save();
-        res.redirect("/");
+        res.redirect("/list");
     }else{
         List.findOne({name: listName}, function(err, result){
             result.items.push(newItem);
             result.save();
-            res.redirect("/" + listName);
+            res.redirect("/list/" + listName);
         });
     };
 
@@ -138,7 +142,7 @@ app.post("/delete", function(req, res){
                 console.log("Item deleted");
             };
         });
-        res.redirect("/")
+        res.redirect("/list")
     }else{
         //Find the List that matches the current page
         //Pull (remove) from the items array within that List, the item which matches the id of the checkbox
@@ -146,11 +150,16 @@ app.post("/delete", function(req, res){
             if(err){
                 console.log(err);
             }else{
-                res.redirect("/" + listName);
+                res.redirect("/list/" + listName);
             };
         });
     };
 
+});
+
+app.post("/create", function(req, res){
+    const newTitle = req.body.newTitle;
+    res.redirect("/list/" + newTitle);
 });
 
 let port = process.env.PORT;

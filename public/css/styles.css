@@ -1,26 +1,34 @@
 html {
   background-color: #E4E9FD;
   background-image: -webkit-linear-gradient(65deg, #A683E3 50%, #E4E9FD 50%);
-  min-height: 1000px;
-  font-family: 'helvetica neue';
+  font-family: 'Montserrat', sans-serif;
 }
+
+body{
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Titles of lists */
 
 h1 {
   color: #fff;
-  padding: 10px;
-}
-
-.box {
-  max-width: 400px;
-  margin: 50px auto;
-  background: white;
-  border-radius: 5px;
-  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+  padding: 5px 80px;
 }
 
 #heading {
   background-color: #A683E3;
   text-align: center;
+}
+
+.box {
+  max-width: 400px;
+  margin: 20px auto;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
 }
 
 .item {
@@ -43,6 +51,8 @@ input[type="checkbox"] {
   margin: 20px;
 }
 
+/* Items in list */
+
 p {
   margin: 0;
   padding: 20px;
@@ -56,16 +66,17 @@ form.item {
   margin-left: 20px;
 }
 
-button {
+/* Add item button */
+.add-btn {
   min-height: 50px;
   width: 50px;
-  border-radius: 50%;
+  border-radius: 10%;
   border-color: transparent;
   background-color: #A683E3;
   color: #fff;
   font-size: 30px;
-  padding-bottom: 6px;
   border-width: 0;
+  margin-right: 10px;
 }
 
 input[type="text"] {
@@ -93,4 +104,111 @@ footer {
   color: white;
   color: rgba(0, 0, 0, 0.5);
   text-align: center;
+  margin-top: auto;
+  padding: 20px;
+}
+
+
+/* NAVBAR STYLING */
+nav{
+  /* Makes nav bar the full width of the viewport */
+  width: 100vw;
+  background-color: #82aef5;
+  margin-bottom: 20px;
+}
+
+ul{
+  /* Get rid of space around the list elements within the parent element */
+  margin: 0;
+  padding: 0;
+  /*this option by default displays the elements in a row (flex-direction: row)*/
+  display: flex;
+}
+
+li{
+  /* Get rid of bullet points in a list */
+  list-style-type: none;
+  /* The first value is for the top and bottom side, the second for the left and right side*/
+  margin: 0 1vw;
+  font-size: 2rem;
+}
+
+a{
+  /* Get rid of the underline from links */
+  text-decoration: none;
+  color: black;
+  padding: 10px;
+  display: block;
+}
+
+/* Property that will change when I move the mouse on the element */
+a:hover{
+  background-color: #2f6ed4;
+}
+
+.logo {
+  padding: 8px;
+  font-family: 'Patrick Hand', cursive;
+}
+
+.nav-btn{
+  /* Won't appear if on a wide screen */
+  display: none;
+}
+
+/* Media Queries */
+
+@media only screen and (max-width: 500px) {
+  /*shows elements in a column*/
+  ul{
+    flex-direction: column;
+  }
+
+  .logo {
+      text-align: center;
+  }
+
+  .nav-btn{
+      /*makes the button visible*/
+      display: block;
+      padding: 10px;
+      font-size: 2rem;
+      background-color: #2f6ed4;
+      border: none;
+      /* Removes the blue border that appears when you click on button*/
+      outline: none;
+      /* Makes the mouse change pointer style so it's obvious the user can click */
+      cursor: pointer;
+      /*this put the button on the left*/
+      align-self: flex-start;
+    }
+}
+
+/* HOMEPAGE STYLING */
+
+h2, h4 {
+  text-align: center;
+}
+
+.homepage-box{
+  display: flex;
+  justify-content: center;
+}
+
+.homepage-btn{
+  padding: 13px 23px;
+  background-color: #FFFFFF;
+  border: 1px solid #222222;
+  text-align: center;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  cursor: pointer;
+  margin: 20px;
+}
+
+input[type="text"].new-input{
+  background: white;
 }

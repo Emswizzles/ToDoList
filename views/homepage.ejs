@@ -1,0 +1,10 @@
+<%- include ("header.ejs") -%>
+<h2>Welcome to ToDoodle</h2>
+<h4>Your one stop shop for all your to-do list needs!</h4>
+<div class="homepage-box">
+    <form action="/create" method="POST">
+        <input class="new-input" type="text" name="newTitle" placeholder="New List Title" autocomplete="off">
+        <button type="submit" class="homepage-btn" name="newList">Create New List</button>
+    </form>
+</div>
+<%- include ("footer.ejs") -%>
