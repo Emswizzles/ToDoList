@@ -41,6 +41,11 @@ const listSchema = new mongoose.Schema ({
 
 const List = new mongoose.model ("List", listSchema);
 
+// Function which pauses the execution of the script to allow time for the list to be added to the DB
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
+
 //Needed so that we are able to grab data from the post request later on
 app.use(express.urlencoded({extended: true}));
 
@@ -115,11 +120,7 @@ app.get("/list/:customListName", function(req, res){
                 });
                 newList.save();
 
-                // Function which pauses the execution of the script to allow time for the list to be added to the DB
-                function delay(time) {
-                    return new Promise(resolve => setTimeout(resolve, time));
-                }
-                delay(1000).then(() => console.log('Adding new list to DB...'));
+                delay(3000).then(() => console.log('Adding new list to DB...'));
 
                 console.log("New list created");
                 res.redirect("/list/" + customListName);
@@ -140,11 +141,13 @@ app.post("/list", function(req, res){
     //Checks to see which list the plus button has been clicked on so that the item is added to the correct one
     if (listName === "Today"){
         newItem.save();
+        delay(3000).then(() => console.log('Adding new item to list...'));
         res.redirect("/list");
     }else{
         List.findOne({name: listName}, function(err, result){
             result.items.push(newItem);
             result.save();
+            delay(3000).then(() => console.log('Adding new item to list...'));
             res.redirect("/list/" + listName);
         });
     };
