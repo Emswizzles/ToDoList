@@ -2,5 +2,10 @@
 <div class="box" id="heading">
     <h1>Current Lists</h1>
 </div>
+<div class="box">
+    <% currentLists.forEach(function(list){ %>
+        <p><%= list %></p>
+    <% }); %>
+</div>
 
 <%- include ("footer.ejs") -%>

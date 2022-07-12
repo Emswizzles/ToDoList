@@ -56,7 +56,21 @@ app.get("/", function(req, res){
 });
 
 app.get("/mylists", function(req, res){
-    res.render("mylists")
+    List.find({}, function(err, results){
+        if(err){
+            console.log(err);
+        }else{
+            const currentLists = [];
+            if(results.length === 0){
+                currentLists.push("No Lists");
+            }else{
+                results.forEach(function(result){
+                    currentLists.push(result.name);
+                });
+            };
+            res.render("mylists", {currentLists: currentLists});
+        };
+    });
 });
 
 app.get("/list", function(req, res){
@@ -100,6 +114,13 @@ app.get("/list/:customListName", function(req, res){
                     items: defaultItems
                 });
                 newList.save();
+
+                // Function which pauses the execution of the script to allow time for the list to be added to the DB
+                function delay(time) {
+                    return new Promise(resolve => setTimeout(resolve, time));
+                }
+                delay(1000).then(() => console.log('Adding new list to DB...'));
+
                 console.log("New list created");
                 res.redirect("/list/" + customListName);
             };
@@ -155,6 +176,18 @@ app.post("/delete", function(req, res){
         });
     };
 
+});
+
+app.post("/deleteList", function(req, res){
+    const listName = req.body.deleteBtn;
+    List.deleteOne({name:listName}, function(err){
+        if(err){
+            console.log(err);
+        }else{
+            console.log("List deleted");
+        };
+    });
+    res.redirect("/mylists");
 });
 
 app.post("/create", function(req, res){
