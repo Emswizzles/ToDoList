@@ -1,11 +1,13 @@
 <%- include ("header.ejs") -%>
-<div class="box" id="heading">
-    <h1>Current Lists</h1>
-</div>
-<div class="box">
-    <% currentLists.forEach(function(list){ %>
-        <a href="/list/<%= list %>" class="list-link"><%= list %></a>
-    <% }); %>
+<div class="page-content"></div>
+    <div class="box" id="heading">
+        <h1>Current Lists</h1>
+    </div>
+    <div class="box">
+        <% currentLists.forEach(function(list){ %>
+            <a href="/list/<%= list %>" class="list-link"><%= list %></a>
+        <% }); %>
+    </div>
 </div>
 
 <%- include ("footer.ejs") -%>

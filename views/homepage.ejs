@@ -1,8 +1,8 @@
 <%- include ("header.ejs") -%>
-<h2>Welcome to ToDoodle</h2>
-<h4>Your one stop shop for all your to-do list needs!</h4>
-<div class="homepage-box">
-    <form action="/create" method="POST">
+<div class="page-content">
+    <h2>Welcome to ToDoodle</h2>
+    <h4>Your one stop shop for all your to-do list needs!</h4>
+    <form action="/create" method="POST" class="new-form">
         <input class="new-input" type="text" name="newTitle" placeholder="New List Title" autocomplete="off"> <br>
         <button type="submit" class="homepage-btn" name="newList">Create New List</button>
     </form>

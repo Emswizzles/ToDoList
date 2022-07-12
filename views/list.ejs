@@ -1,28 +1,30 @@
 <%- include ("header.ejs") -%>
-<div class="box" id="heading">
-    <h1><%= listTitle %></h1>
-</div>
-<div class="box">
-    <%# Snippets tags so that we can run JS code in ejs %>
-    <% items.forEach(function(item){ %>
-        <form action="/delete" method="POST">
-            <div class="item">
-                <input type="checkbox" onchange="this.form.submit()" name="checkbox" value="<%= item._id %>">
-                <p> <%= item.name %> </p>
-                <input type="hidden" name="listName" value="<%= listTitle %>">
-            </div>
-        </form>
-    <% }); %>
-    <form action="/list" method="POST" class="item">
-        <input type="text" class="newItemInput" name="item" placeholder="New Item" autocomplete="off">
-        <button type="submit" class="add-btn" name="list" value="<%= listTitle %>">+</button>
-    </form>
-</div>
-<% if(listTitle !== "Today"){ %>
-    <div>
-        <form action="/deleteList" method="POST">
-            <button type="submit" class="delete-btn" name="deleteBtn" value="<%= listTitle %>">Delete List</button>
+<div class="page-content">
+    <div class="box" id="heading">
+        <h1><%= listTitle %></h1>
+    </div>
+    <div class="box">
+        <%# Snippets tags so that we can run JS code in ejs %>
+        <% items.forEach(function(item){ %>
+            <form action="/delete" method="POST">
+                <div class="item">
+                    <input type="checkbox" onchange="this.form.submit()" name="checkbox" value="<%= item._id %>">
+                    <p> <%= item.name %> </p>
+                    <input type="hidden" name="listName" value="<%= listTitle %>">
+                </div>
+            </form>
+        <% }); %>
+        <form action="/list" method="POST" class="item">
+            <input type="text" class="newItemInput" name="item" placeholder="New Item" autocomplete="off">
+            <button type="submit" class="add-btn" name="list" value="<%= listTitle %>">+</button>
         </form>
     </div>
-<% } %>
+    <% if(listTitle !== "Today"){ %>
+        <div>
+            <form action="/deleteList" method="POST">
+                <button type="submit" class="delete-btn" name="deleteBtn" value="<%= listTitle %>">Delete List</button>
+            </form>
+        </div>
+    <% } %>
+</div>
 <%- include ("footer.ejs") -%>

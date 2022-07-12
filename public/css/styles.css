@@ -119,8 +119,8 @@ h2, h4 {
   text-align: center;
 }
 
-.homepage-box{
-  margin: 0 auto;
+.new-form{
+  text-align: center;
 }
 
 .homepage-btn{
@@ -134,13 +134,12 @@ h2, h4 {
   font-weight: 600;
   line-height: 20px;
   cursor: pointer;
-  margin: 20px 20px 20px 75px;
+  margin: 20px;
 }
 
 .new-input{
   text-align: center;
   height: 60px;
-  top: 10px;
   border: 1px solid;
   background: transparent;
   font-size: 20px;
@@ -210,13 +209,21 @@ a {
 
 /* For smaller screen sizes */
 @media (max-width: 50em ){
+  .page-content{
+    margin-top: 100px;
+  }
+
   .primary-nav{
       position: fixed;
       /* Push the menu to the right of the screen */
-      inset: 0 0 0 30%;
+      inset: 0 0 30% 30%;
+      gap: 2rem;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 30px;
+      margin: none;
       background-color: white;
       flex-direction: column;
-      padding: 2rem;
       /* Slide the menu off screen as standard */
       transform: translateX(100%);
       transition: transform 350ms ease-out;
